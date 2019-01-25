@@ -7,7 +7,7 @@ class App extends Component {
     return (
       <div className="app">
         <div className="nav-bar-top">
-          Mi Ciudad
+          The Weather App
         </div>
         <div className="container">
           <WeatherLocation />
