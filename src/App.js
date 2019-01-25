@@ -10,7 +10,7 @@ class App extends Component {
           The Weather App
         </div>
         <div className="container">
-          <WeatherLocation />
+          <WeatherLocation city="San Salvador de Jujuy"/>
         </div>
       </div>
     );
