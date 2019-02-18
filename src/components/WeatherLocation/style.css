@@ -1,16 +1,13 @@
+.weather-data {
+  border: 4px solid #0066aa;
+  align-self: flex-end;
+}
 .weather-location {
     border: 4px solid red;
-    flex-grow: 2;
-    display: flex;
-  }
-  
-  .weather-location .weather-data {
-    border: 4px solid #0066aa;
-    width: 60%;
-    align-self: flex-end;
-  }
-  
-  .weather-location .weather-data-icon {
+    height: 100%;
+}
+
+/*  .weather-location .weather-data-icon {
     padding: 8px;
   }
   
@@ -24,4 +21,4 @@
     padding: 8px;
     display: flex;
     align-items: center;  
-  }
+  } */
