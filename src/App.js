@@ -13,7 +13,7 @@ class App extends Component {
           The Weather App
         </Grid>
         <Grid item className="app-container">
-          <WeatherLocation city="Paris,FR" />
+          <WeatherLocation city="Perico,AR" />
         </Grid>
       </Grid>
     );
