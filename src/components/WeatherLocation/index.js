@@ -1,7 +1,8 @@
 import React from 'react';
 import WeatherData from './WeatherData/index.js';
 import { Grid, CircularProgress } from '@material-ui/core';
-import getApiUrlByLocation from '../../services/getApiUrlByLocation';
+import getWeatherUrlByLocation from '../../services/getWeatherUrlByLocation';
+import convertIcon from '../../services/convertIcon';
 import './style.css';
 
 class WeatherLocation extends React.Component {
@@ -9,14 +10,15 @@ class WeatherLocation extends React.Component {
         super(props);
 
         this.state = {
-            icon: "day-sunny",
-            temp: 0,
-            min: 0,
-            max: 0,
-            wind: 0,
-            pressure: 0,
-            humidity: 0,
-
+            weatherData: {
+                icon: "day-sunny",
+                temp: 0,
+                min: 0,
+                max: 0,
+                wind: 0,
+                pressure: 0,
+                humidity: 0,
+            },
             errorMessage: null,
             isLoading: false
         };
@@ -28,7 +30,7 @@ class WeatherLocation extends React.Component {
             isLoading: true
         });
 
-        const url = getApiUrlByLocation(this.props.city);
+        const url = getWeatherUrlByLocation(this.props.city);
         fetch(url)
             .then(response => {
                 this.setState({
@@ -44,11 +46,14 @@ class WeatherLocation extends React.Component {
             .then(data => {
                 console.log(data);
                 this.setState({
-                    temp: data.main.temp,
-                    max: data.main.temp_max,
-                    min: data.main.temp_min,
-                    humidity: data.main.humidity,
-                    pressure: data.main.pressure,
+                    weatherData: {
+                        icon: convertIcon(data.weather[0].main),
+                        temp: data.main.temp,
+                        max: data.main.temp_max,
+                        min: data.main.temp_min,
+                        humidity: data.main.humidity,
+                        pressure: data.main.pressure,
+                    },
                     errorMessage: null
                 });
             }).catch(error => {
@@ -72,15 +77,7 @@ class WeatherLocation extends React.Component {
 
             {
                 (!this.state.isLoading) 
-                    ? <WeatherData
-                            icon={this.state.icon}
-                            temp={this.state.temp}
-                            min={this.state.min}
-                            max={this.state.max}
-                            wind={this.state.wind}
-                            pressure={this.state.pressure}
-                            humidity={this.state.humidity}
-                        />
+                    ? <WeatherData data={this.state.weatherData} />
                     : <CircularProgress variant="indeterminate" size={80} color="primary" />
             }
         </Grid>

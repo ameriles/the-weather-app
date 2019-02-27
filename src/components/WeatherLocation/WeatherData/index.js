@@ -3,8 +3,9 @@ import WeatherIcons from 'react-weathericons';
 import { Grid } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
-const WeatherData = ({ icon, temp, min, max, wind, pressure, humidity }) => (
-    <Grid container
+const WeatherData = ({ data }) => {
+    const {icon, temp, min, max, wind, pressure, humidity} = data;
+    return <Grid container
         direction="row"
         className="weather-data">
         <Grid item
@@ -25,16 +26,18 @@ const WeatherData = ({ icon, temp, min, max, wind, pressure, humidity }) => (
             </div>
         </Grid>
     </Grid>
-);
+}
 
 WeatherData.propTypes = {
-    icon: PropTypes.string.isRequired,
-    temp: PropTypes.number.isRequired,
-    min: PropTypes.number.isRequired,
-    max: PropTypes.number.isRequired,
-    wind: PropTypes.number,
-    pressure: PropTypes.number,
-    humidity: PropTypes.number
+    data: PropTypes.shape({
+        icon: PropTypes.string.isRequired,
+        temp: PropTypes.number.isRequired,
+        min: PropTypes.number.isRequired,
+        max: PropTypes.number.isRequired,
+        wind: PropTypes.number,
+        pressure: PropTypes.number,
+        humidity: PropTypes.number
+    })
 };
 
 export default WeatherData;

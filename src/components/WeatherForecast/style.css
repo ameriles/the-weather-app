@@ -1,0 +1,11 @@
+.forecast-item-icon,
+.forecast-item-temp,
+.forecast-item-max,
+.forecast-item-min   {
+    display: inline-block;
+    padding: 4px;
+}
+
+.forecast-item {
+    border-bottom: 1px solid #888;
+}
