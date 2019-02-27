@@ -3,6 +3,7 @@ import ForecastItem from './ForecastItem';
 import getForecastUrlByLocation from '../../services/getForecastUrlByLocation';
 import convertToForecastItem from '../../services/convertToForecastItem';
 import PropTypes from 'prop-types';
+import { Grid } from '@material-ui/core';
 import './style.css';
 
 class WeatherForecast extends React.Component {
@@ -34,15 +35,16 @@ class WeatherForecast extends React.Component {
                 console.log(error);
             });
     }
-    
-    render() {
-        return <div>
-            <h2>Pronóstico Extendido</h2>
 
-            <div className="forecast-list">
-                {this.state.items.map((x, i) => <ForecastItem itemData={x} key={i}/>)}
-            </div>
-        </div>
+    render() {
+        return <Grid container direction="column" className="forecast">
+            <Grid item>
+                <h2>Pronóstico Extendido</h2>
+                <div className="forecast-list">
+                    {this.state.items.map((x, i) => <ForecastItem itemData={x} key={i} />)}
+                </div>
+            </Grid>
+        </Grid>
     }
 }
 
