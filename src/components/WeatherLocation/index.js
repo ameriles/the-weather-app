@@ -1,6 +1,6 @@
 import React from 'react';
 import WeatherData from './WeatherData/index.js';
-import { Grid, CircularProgress } from '@material-ui/core';
+import { Grid, CircularProgress, Typography } from '@material-ui/core';
 import getWeatherUrlByLocation from '../../services/getWeatherUrlByLocation';
 import convertIcon from '../../services/convertIcon';
 import './style.css';
@@ -73,7 +73,7 @@ class WeatherLocation extends React.Component {
                 <p><strong>Error: </strong>{this.state.errorMessage}</p>
             </div>
 
-            <h1>{this.props.city}</h1>
+            <Typography variant="h5">{this.props.city}</Typography>
 
             {
                 (!this.state.isLoading) 

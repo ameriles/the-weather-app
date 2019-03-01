@@ -1,9 +1,7 @@
 .weather-data {
-  border: 4px solid #0066aa;
   align-self: flex-end;
 }
 .weather-location {
-    border: 4px solid red;
     height: 100%;
 }
 

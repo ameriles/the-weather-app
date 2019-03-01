@@ -3,7 +3,7 @@ import ForecastItem from './ForecastItem';
 import getForecastUrlByLocation from '../../services/getForecastUrlByLocation';
 import convertToForecastItem from '../../services/convertToForecastItem';
 import PropTypes from 'prop-types';
-import { Grid } from '@material-ui/core';
+import { Grid, CircularProgress, Typography } from '@material-ui/core';
 import './style.css';
 
 class WeatherForecast extends React.Component {
@@ -11,14 +11,22 @@ class WeatherForecast extends React.Component {
         super(props);
 
         this.state = {
-            items: []
+            items: [],
+            isLoading: false
         };
     }
 
     componentWillMount() {
+        this.setState({
+            isLoading: true
+        });
+
         fetch(getForecastUrlByLocation(this.props.city))
             .then(response => {
                 if (response.ok) {
+                    this.setState({
+                        isLoading: false
+                    });
                     return response.json();
                 } else {
                     throw Error('No se encontró pronóstico extendido');
@@ -33,16 +41,25 @@ class WeatherForecast extends React.Component {
             })
             .catch(error => {
                 console.log(error);
+                this.setState({
+                    isLoading: false
+                });
             });
     }
 
     render() {
         return <Grid container direction="column" className="forecast">
             <Grid item>
-                <h2>Pronóstico Extendido</h2>
-                <div className="forecast-list">
-                    {this.state.items.map((x, i) => <ForecastItem itemData={x} key={i} />)}
-                </div>
+                <Typography variant="h5" component="h5">Pronóstico Extendido</Typography>
+
+                {
+                    (!this.state.isLoading) 
+                        ? <div className="forecast-list">
+                            {this.state.items.map((x, i) => <ForecastItem itemData={x} key={i} />)}
+                          </div>
+                        : <CircularProgress variant="indeterminate" size={80} color="primary" />
+                }
+
             </Grid>
         </Grid>
     }
